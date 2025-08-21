@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portafolio de Yonathan Sosa - Analista de Datos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        .editable {
+            outline: none;
+            cursor: pointer;
+        }
+        .editable-active {
+            border-bottom: 2px solid #3b82f6;
+            transition: border-color 0.2s ease-in-out;
+        }
+        .editable:focus {
+            border-bottom: 2px solid #3b82f6;
+        }
+        .edit-mode-hidden {
+            display: none;
+        }
+        #message-box {
+            position: fixed;
+            bottom: -100px;
+            right: 1rem;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+            transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+            transform: translateY(100%);
+            opacity: 0;
+            z-index: 50;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100 text-gray-900">
+
+    <!-- Header -->
+    <header class="bg-white shadow-md rounded-b-xl p-4 md:p-6 mb-8 mx-4 md:mx-auto max-w-7xl">
+        <nav class="flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-blue-600 editable" id="header-name">Portafolio de Yonathan Sosa</a>
+            <ul class="hidden md:flex space-x-6 font-medium">
+                <li><a href="#about" class="hover:text-blue-600 transition-colors">Acerca de Mí</a></li>
+                <li><a href="#projects" class="hover:text-blue-600 transition-colors">Proyectos</a></li>
+                <li><a href="#certifications" class="hover:text-blue-600 transition-colors">Credenciales</a></li>
+                <li><a href="#contact" class="hover:text-blue-600 transition-colors">Contacto</a></li>
+            </ul>
+            <div class="flex space-x-2">
+                <button id="edit-mode-btn" class="bg-blue-500 text-white font-semibold py-2 px-4 rounded-md shadow-md hover:bg-blue-600 transition-colors text-sm">
+                    Modo de Edición
+                </button>
+                <button id="save-btn" class="bg-green-500 text-white font-semibold py-2 px-4 rounded-md shadow-md hover:bg-green-600 transition-colors text-sm edit-mode-hidden">
+                    Guardar Cambios
+                </button>
+            </div>
+            <button id="mobile-menu-btn" class="md:hidden text-gray-600 focus:outline-none">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                </svg>
+            </button>
+        </nav>
+        <div id="mobile-menu" class="hidden md:hidden mt-4 bg-white rounded-lg shadow-lg">
+            <ul class="space-y-2 p-4 font-medium">
+                <li><a href="#about" class="block py-2 text-gray-700 hover:bg-gray-100 rounded-md">Acerca de Mí</a></li>
+                <li><a href="#projects" class="block py-2 text-gray-700 hover:bg-gray-100 rounded-md">Proyectos</a></li>
+                <li><a href="#certifications" class="block py-2 text-gray-700 hover:bg-gray-100 rounded-md">Credenciales</a></li>
+                <li><a href="#contact" class="block py-2 text-gray-700 hover:bg-gray-100 rounded-md">Contacto</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-8 max-w-7xl">
+
+        <!-- Acerca de Mí -->
+        <section id="about" class="bg-white p-6 md:p-10 rounded-xl shadow-md mb-8">
+            <h2 class="text-3xl font-bold text-center mb-6 text-gray-800">Acerca de Mí</h2>
+            <div class="flex flex-col md:flex-row items-center md:items-start space-y-6 md:space-y-0 md:space-x-10">
+                <div class="relative group">
+                    <!-- Cambia la URL por la de tu foto -->
+                    <img id="profile-pic" src="https://placehold.co/150x150/3498db/ffffff?text=Tu+Foto" alt="Foto de Perfil de Yonathan" class="w-32 h-32 rounded-full object-cover border-4 border-blue-400 shadow-lg">
+                    <div class="absolute bottom-0 left-0 right-0 p-2 bg-black bg-opacity-50 text-white rounded-b-full text-center edit-mode-hidden">
+                        <input type="url" id="profile-pic-input" placeholder="URL de la imagen" class="w-full text-sm bg-transparent border-none focus:ring-0 text-white">
+                    </div>
+                </div>
+                <div class="text-center md:text-left w-full">
+                    <h3 class="text-2xl font-semibold text-gray-700 editable" id="about-title">¡Hola! Soy Yonathan Sosa</h3>
+                    <p class="mt-2 text-gray-600 leading-relaxed editable" id="about-text">
+                        Soy un apasionado analista de datos con experiencia en el manejo de grandes conjuntos de datos y la creación de visualizaciones interactivas. Me especializo en el uso de herramientas como Power BI y Excel para transformar datos en conocimientos valiosos que impulsan la toma de decisiones. Mi objetivo es contar historias a través de los datos y ayudar a las empresas a alcanzar sus metas.
+                    </p>
+                    <div class="mt-4">
+                        <label for="portfolio" class="block text-sm font-medium text-gray-700">Enlace a Portafolio</label>
+                        <input type="url" id="portfolio" name="portfolio" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm transition-all p-2" placeholder="https://tuportafolio.com">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Proyectos -->
+        <section id="projects" class="bg-white p-6 md:p-10 rounded-xl shadow-md mb-8">
+            <h2 class="text-3xl font-bold text-center mb-6 text-gray-800">Mis Proyectos</h2>
+            <div id="projects-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Tarjeta de Proyecto 1 -->
+                <div class="bg-gray-50 rounded-lg shadow-md overflow-hidden transform hover:scale-105 transition-transform duration-300 project-card">
+                    <div class="relative group">
+                        <img src="https://placehold.co/600x400/3b82f6/ffffff?text=Proyecto+1" alt="Imagen del Proyecto 1" class="w-full h-48 object-cover project-image">
+                        <div class="absolute bottom-0 left-0 right-0 p-2 bg-black bg-opacity-50 text-white text-center edit-mode-hidden">
+                            <input type="url" placeholder="URL de la imagen" class="w-full text-sm bg-transparent border-none focus:ring-0 text-white project-image-input">
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="font-semibold text-lg text-gray-700 editable project-title">Análisis de Ventas con Power BI</h3>
+                        <p class="text-gray-500 mt-2 editable project-description">Un dashboard interactivo que muestra las métricas de ventas, tendencias y pronósticos.</p>
+                        <div class="relative mt-4">
+                            <a href="#" target="_blank" class="inline-block text-blue-600 hover:text-blue-800 transition-colors font-medium project-link">Ver Proyecto &rarr;</a>
+                            <div class="edit-mode-hidden absolute top-0 w-full">
+                                <input type="url" placeholder="URL del Proyecto" class="w-full text-sm p-1 rounded border project-link-input">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Tarjeta de Proyecto 2 -->
+                <div class="bg-gray-50 rounded-lg shadow-md overflow-hidden transform hover:scale-105 transition-transform duration-300 project-card">
+                    <div class="relative group">
+                        <img src="https://placehold.co/600x400/16a34a/ffffff?text=Proyecto+2" alt="Imagen del Proyecto 2" class="w-full h-48 object-cover project-image">
+                        <div class="absolute bottom-0 left-0 right-0 p-2 bg-black bg-opacity-50 text-white text-center edit-mode-hidden">
+                            <input type="url" placeholder="URL de la imagen" class="w-full text-sm bg-transparent border-none focus:ring-0 text-white project-image-input">
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="font-semibold text-lg text-gray-700 editable project-title">Dashboard Financiero en Excel</h3>
+                        <p class="text-gray-500 mt-2 editable project-description">Un modelo de datos y dashboard en Excel para analizar el rendimiento financiero.</p>
+                        <div class="relative mt-4">
+                            <a href="#" target="_blank" class="inline-block text-blue-600 hover:text-blue-800 transition-colors font-medium project-link">Ver Proyecto &rarr;</a>
+                            <div class="edit-mode-hidden absolute top-0 w-full">
+                                <input type="url" placeholder="URL del Proyecto" class="w-full text-sm p-1 rounded border project-link-input">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Tarjeta de Proyecto 3 -->
+                <div class="bg-gray-50 rounded-lg shadow-md overflow-hidden transform hover:scale-105 transition-transform duration-300 project-card">
+                    <div class="relative group">
+                        <img src="https://placehold.co/600x400/dc2626/ffffff?text=Proyecto+3" alt="Imagen del Proyecto 3" class="w-full h-48 object-cover project-image">
+                        <div class="absolute bottom-0 left-0 right-0 p-2 bg-black bg-opacity-50 text-white text-center edit-mode-hidden">
+                            <input type="url" placeholder="URL de la imagen" class="w-full text-sm bg-transparent border-none focus:ring-0 text-white project-image-input">
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="font-semibold text-lg text-gray-700 editable project-title">Análisis de Clientes con Power BI</h3>
+                        <p class="text-gray-500 mt-2 editable project-description">Un reporte que segmenta a los clientes y analiza su comportamiento de compra.</p>
+                        <div class="relative mt-4">
+                            <a href="#" target="_blank" class="inline-block text-blue-600 hover:text-blue-800 transition-colors font-medium project-link">Ver Proyecto &rarr;</a>
+                            <div class="edit-mode-hidden absolute top-0 w-full">
+                                <input type="url" placeholder="URL del Proyecto" class="w-full text-sm p-1 rounded border project-link-input">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Credenciales y Certificaciones -->
+        <section id="certifications" class="bg-white p-6 md:p-10 rounded-xl shadow-md mb-8">
+            <h2 class="text-3xl font-bold text-center mb-6 text-gray-800">Credenciales y Certificaciones</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Tarjeta de Certificación 1 -->
+                <div class="bg-gray-50 p-6 rounded-lg shadow-md credential-card">
+                    <div class="relative group mb-4">
+                        <img src="https://placehold.co/600x400/3b82f6/ffffff?text=Certificación+1" alt="Imagen de Certificación 1" class="w-full h-auto object-cover rounded-lg shadow-sm credential-image">
+                        <div class="absolute bottom-0 left-0 right-0 p-2 bg-black bg-opacity-50 text-white text-center rounded-b-lg edit-mode-hidden">
+                            <input type="url" placeholder="URL de la imagen de la certificación" class="w-full text-sm bg-transparent border-none focus:ring-0 text-white credential-image-input">
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-700 editable credential-title">Microsoft Certified: Power BI Data Analyst Associate</h3>
+                    <p class="mt-2 text-gray-600 editable credential-description">Certificación que valida mi habilidad para diseñar y construir modelos de datos escalables y crear informes y visualizaciones de datos.</p>
+                </div>
+                <!-- Tarjeta de Certificación 2 -->
+                <div class="bg-gray-50 p-6 rounded-lg shadow-md credential-card">
+                    <div class="relative group mb-4">
+                        <img src="https://placehold.co/600x400/16a34a/ffffff?text=Certificación+2" alt="Imagen de Certificación 2" class="w-full h-auto object-cover rounded-lg shadow-sm credential-image">
+                        <div class="absolute bottom-0 left-0 right-0 p-2 bg-black bg-opacity-50 text-white text-center rounded-b-lg edit-mode-hidden">
+                            <input type="url" placeholder="URL de la imagen de la certificación" class="w-full text-sm bg-transparent border-none focus:ring-0 text-white credential-image-input">
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-700 editable credential-title">Analista de Datos Profesional (Google)</h3>
+                    <p class="mt-2 text-gray-600 editable credential-description">Programa de certificación de Google que abarca la limpieza, el análisis y la visualización de datos usando SQL, R, y herramientas de visualización.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contacto -->
+        <section id="contact" class="bg-white p-6 md:p-10 rounded-xl shadow-md mb-8">
+            <h2 class="text-3xl font-bold text-center mb-6 text-gray-800">Contacto</h2>
+            <div class="max-w-xl mx-auto">
+                <p class="text-center text-gray-600 mb-6">¿Interesado en trabajar juntos? Envíame un mensaje.</p>
+                <!-- Cambia TU_FORM_ID_AQUI por el ID de tu formulario de Formspree -->
+                <form action="https://formspree.io/f/TU_FORM_ID_AQUI" method="POST" class="space-y-4">
+                    <div>
+                        <label for="name" class="block text-sm font-medium text-gray-700">Nombre</label>
+                        <input type="text" id="name" name="name" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50 transition-all p-2">
+                    </div>
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-gray-700">Correo Electrónico</label>
+                        <input type="email" id="email" name="email" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50 transition-all p-2">
+                    </div>
+                    <div>
+                        <label for="message" class="block text-sm font-medium text-gray-700">Mensaje</label>
+                        <textarea id="message" name="message" rows="4" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50 transition-all p-2"></textarea>
+                    </div>
+                    <button type="submit" class="w-full bg-blue-600 text-white font-semibold py-2 px-4 rounded-md shadow-md hover:bg-blue-700 transition-colors">
+                        Enviar Mensaje
+                    </button>
+                </form>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-gray-300 text-center py-6 mt-8 rounded-t-xl mx-4 md:mx-auto max-w-7xl">
+        <p>&copy; 2024 <span class="editable" id="footer-name">Portafolio de Yonathan Sosa</span>. Todos los derechos reservados.</p>
+        <div class="mt-2 space-x-4">
+            <a href="#" class="hover:text-white transition-colors">Twitter</a>
+            <a href="#" class="hover:text-white transition-colors">LinkedIn</a>
+            <a href="#" class="hover:text-white transition-colors">GitHub</a>
+        </div>
+    </footer>
+    <div id="message-box" class="fixed bottom-4 right-4 p-4 rounded-lg shadow-lg"></div>
+</body>
+</html>
